@@ -59,21 +59,27 @@ var currentTime = moment();
 
     // Minute Until Train
     var toneMinutesTillTrain = toneFrequency - toneRemainder;
+    $(".oMinAway").html(toneMinutesTillTrain)
     console.log("MINUTES TILL TRAIN: " + toneMinutesTillTrain);
 
     var tsecondMinutesTillTrain = tsecondFrequency - tsecondRemainder;
+    $(".sMinAway").html(tsecondMinutesTillTrain)
     console.log("MINUTES TILL TRAIN: " + tsecondMinutesTillTrain);
 
     var tthirdMinutesTillTrain = tthreeFrequency - tthirdRemainder;
+    $(".tMinAway").html(tthirdMinutesTillTrain)
     console.log("MINUTES TILL TRAIN: " + tthirdMinutesTillTrain);
 
     // Next Train
     var nextoneTrain = moment().add(toneMinutesTillTrain, "minutes");
+    $(".onearrivalTime").html(nextoneTrain)
     console.log("ARRIVAL TIME: " + moment(nextoneTrain).format("hh:mm"));
 
     var nextsecondTrain = moment().add(tsecondMinutesTillTrain, "minutes");
+    $(".secondarrivalTime").html(nextsecondTrain)
     console.log("ARRIVAL TIME: " + moment(nextsecondTrain).format("hh:mm"));
 
     var nextthirdTrain = moment().add(tthirdMinutesTillTrain, "minutes");
+    $(".thirdarrivalTime").html(nextthirdTrain)
     console.log("ARRIVAL TIME: " + moment(nextthirdTrain).format("hh:mm"));
 
