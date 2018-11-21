@@ -10,16 +10,16 @@
     <link rel="stylesheet" href="css/style.css">
    
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    <script src="javascript/script.js"></script>
+    
     
     
 </head>
 <body>
     
-    <div class="container">
+    <div class="container" id="pink">
         <div class="words">
             <h1 class="row" id="header">
             Train Schedule!
@@ -32,6 +32,8 @@
 
     </div>
 
+
+<div class="container">
    <table class="table">
         <thead>
             <tr>
@@ -49,26 +51,28 @@
                 <td>Anaheim, California</td>
                 <td id="CalFrequency">10</td>
                 <td class="onearrivalTime">3:30</td>
-                <td class="oMinAway">6</td>
+                <td class="oMinAway"></td>
             </tr>
             <tr>
                 <td>Witch Trials Express</td>
                 <td>Salem, Oregon</td>
                 <td class="Wfrequency">50</td>
                 <td class="secondarrivalTime">4:50</td>
-                <td class="sMinAway">15</td>
+                <td class="sMinAway"></td>
             </tr>
             <tr>
                 <td>Southwestern Tracks</td>
                 <td>Orange County, California</td>
                 <td class="SWfrequency">25</td>
                 <td class="thirdarrivalTime">1:00</td>
-                <td class="tMinAway">12</td>
+                <td class="tMinAway"></td>
             </tr>
             <tr id="hello"></tr>
         </tbody>
 
    </table>
+
+</div>
 
    <div class="container">
 
@@ -83,7 +87,7 @@
         </div>
         <div class="form-group row">
           <label for="Time-input">First Train Time:</label>
-          <input class="form-control" id="time-input" type="time">
+          <input class="form-control" id="train-input" type="time">
         </div>
         <div class="form-group row">
           <label for="Frequency-input">Frequency</label>
@@ -93,7 +97,7 @@
       </form>
 
     </div>
-
+    <script src="javascript/script.js"></script>
    
 </body>
 </html>

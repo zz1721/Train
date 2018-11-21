@@ -21,7 +21,7 @@ var config = {
 
   firebase.initializeApp(config);
 
-  var dataRef = firebase.database();
+  var database = firebase.database();
 
 
 
@@ -30,7 +30,7 @@ var toneFrequency = 10;
 var tsecondFrequency = 50;
 var tthreeFrequency = 25;
 
-var firstTrainTime= "5:30";
+var firstTrainTime= "5:00";
 var secondTrainTime= "4:00";
 var thirdTrainTime= "3:30";
    // Capture Button Click
@@ -60,7 +60,7 @@ var thirdTrainTime= "3:30";
 //     });
 //   });
 
-
+var Timeinput;
 
  // First Time (pushed back 1 year to make sure it comes before current time)
 var firstTimeConverted = moment(firstTrainTime, "HH:mm").subtract(1, "years");
@@ -115,29 +115,31 @@ var currentTime = moment();
     console.log("MINUTES TILL TRAIN: " + tthirdMinutesTillTrain);
 
     // Next Train
-    var nextoneTrain = moment().add(toneMinutesTillTrain, "minutes");
-    $(".onearrivalTime").html(nextoneTrain)
-    console.log("ARRIVAL TIME: " + moment(nextoneTrain).format("hh:mm"));
+    // var nextoneTrain = moment().add(toneMinutesTillTrain, "minutes");
+    // $(".onearrivalTime").html(nextoneTrain)
+    // console.log("ARRIVAL TIME: " + moment(nextoneTrain).format("hh:mm a"));
 
-    var nextsecondTrain = moment().add(tsecondMinutesTillTrain, "minutes");
-    $(".secondarrivalTime").html(nextsecondTrain)
-    console.log("ARRIVAL TIME: " + moment(nextsecondTrain).format("hh:mm"));
+    // var nextsecondTrain = moment().add(tsecondMinutesTillTrain, "minutes");
+    // $(".secondarrivalTime").html(nextsecondTrain)
+    // console.log("ARRIVAL TIME: " + moment(nextsecondTrain).format("hh:mm A"));
 
     var nextthirdTrain = moment().add(tthirdMinutesTillTrain, "minutes");
     $(".thirdarrivalTime").html(nextthirdTrain)
     console.log("ARRIVAL TIME: " + moment(nextthirdTrain).format("hh:mm"));
-
+    Timeinput=moment(nextthirdTrain).format("hh:mm A");
     
     $("#add-train").on("click", function(event) {
         event.preventDefault();
       
         // Grabs user input
         var TrainName = $("#name-input").val().trim();
-        var Destination = $("#Destination-input").val().trim();
-        var Timeinput = moment($("#Time-input").val().trim(), "HH:mm").format("X");
-        var FrequencyInput = $("#Frequency-input").val().trim();
+        var Destination = $("#destination-input").val().trim();
+        Timeinput = moment($("#train-input").val().trim(), "HH:mm").format("X");
+        var FrequencyInput = $("#time-input").val().trim();
+
+        
       
-        // Creates local "temporary" object for holding employee data
+        // Creates local "temporary" object for holding  data
         var newEmp = {
           name: TrainName,
           Destination: Destination,
@@ -149,12 +151,12 @@ var currentTime = moment();
         database.ref().push(newEmp);
       
         // Logs everything to console
-        console.log(newEmp.name);
+        console.log(newEmp.name, "train");
         console.log(newEmp.Destination);
         console.log(newEmp.Timeinput);
         console.log(newEmp.FrequencyInput);
       
-        alert("Employee successfully added");
+        alert("Etrain successfully added");
       
         // Clears all of the text-boxes
         $("#name-input").val("");
@@ -168,7 +170,7 @@ var currentTime = moment();
         console.log(childSnapshot.val());
       
         // Store everything into a variable.
-        var TrainName = childSnapshot.val().TraiNname;
+        var TrainName = childSnapshot.val().name;
         var Destination = childSnapshot.val().Destination;
         var Timeinput = childSnapshot.val().Timeinput;
         var FrequencyInput = childSnapshot.val().FrequencyInput;
@@ -179,8 +181,9 @@ var currentTime = moment();
         console.log(Timeinput);
         console.log(FrequencyInput);
       
+        
         // Prettify the employee start
-        var Timeinputtt = moment.unix(Timeinput).format("HH:mm");
+        var Timeinput = moment.unix(Timeinput).format("HH:mm A");
       
         // Calculate the months worked using hardcore math
         // To calculate the months worked
@@ -195,11 +198,12 @@ var currentTime = moment();
         var newRow = $("<tr>").append(
           $("<td>").text(TrainName),
           $("<td>").text(Destination),
+          $("<td>").text(FrequencyInput),
           $("<td>").text(Timeinput),
-          $("<td>").text(TimeMin),
+          $("<td>").text(toneMinutesTillTrain)
         );
       
         // Append the new row to the table
-        $("#hello > tbody").append(newRow);
+        $("tbody").append(newRow);
       });
 
